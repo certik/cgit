@@ -248,9 +248,8 @@ static void reporevlink(char *page, char *name, char *title, char *class,
 
 	delim = repolink(title, class, page, head, path);
 	if (rev && strcmp(rev, ctx.qry.head)) {
-		html(delim);
-		html("id=");
 		html_url_arg(rev);
+		html("/");
 	}
 	html("'>");
 	html_txt(name);
