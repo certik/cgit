@@ -100,3 +100,55 @@ The missing features
 
 Patches/bugreports/suggestions/comments are always welcome, please feel free
 to contact the author: hjemli@gmail.com
+
+
+Example of configuring cgit on Debian
+
+$ cd public_html
+$ git clone git://hjemli.net/pub/git/cgit git
+$ cd git
+$ git submodule init
+$ git submodule update
+$ vim Makefile
+
+and apply this patch:
+
+-CGIT_CONFIG = /etc/cgitrc
++CGIT_CONFIG = /home/ondra/public_html/git/cgitrc
+
+(change the path to your cgit directory)
+
+$ make
+$ ln cgit cgit.cgi
+$ vim cgitrc
+
+and add the following contents:
+
+clone-prefix=http://your.server/git
+snapshots=tar.gz tar.bz2 zip
+css=/git/cgit.css
+
+repo.url=cgit
+repo.path=/home/ondra/public_html/git/.git
+
+repo.url=hermes2d
+repo.path=/home/ondra/some/otherrepo/.git
+
+$ sudo vim /etc/apache2/site-enabled/your.site
+
+And add the following lines
+
+    RewriteRule ^/git/cgit.css$ /home/ondra/public_html/git/cgit.css
+    RewriteRule ^/git(.*)$ /home/ondra/public_html/git/cgit.cgi$1
+
+    <Directory "/home/ondra/public_html/git/">
+          AllowOverride None
+          AddHandler cgi-script .cgi
+          Options ExecCGI FollowSymLinks
+          Order allow,deny
+          Allow from all
+    </Directory>
+
+$ sudo /etc/init.d/apache2 restart
+
+And go to the address http://your.server/git/
