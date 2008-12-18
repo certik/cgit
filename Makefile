@@ -1,7 +1,7 @@
 CGIT_VERSION = v0.8.1
-CGIT_SCRIPT_NAME = cgit.cgi
+CGIT_SCRIPT_NAME = 
 CGIT_SCRIPT_PATH = /var/www/htdocs/cgit
-CGIT_CONFIG = /etc/cgitrc
+CGIT_CONFIG = /home/ondra/repos/cgit/cgitrc
 CACHE_ROOT = /var/cache/cgit
 SHA1_HEADER = <openssl/sha.h>
 GIT_VER = 1.6.0.3
