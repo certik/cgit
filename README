@@ -134,6 +134,9 @@ repo.path=/home/ondra/public_html/git/.git
 repo.url=hermes2d
 repo.path=/home/ondra/some/otherrepo/.git
 
+Apache
+------
+
 $ sudo vim /etc/apache2/site-enabled/your.site
 
 And add the following lines
@@ -152,3 +155,21 @@ And add the following lines
 $ sudo /etc/init.d/apache2 restart
 
 And go to the address http://your.server/git/
+
+Lighttpd
+--------
+
+$ cat /etc/lighttpd/conf-available/20-cgit.conf
+server.modules  += ( "mod_cgi", "mod_rewrite" )
+
+url.rewrite-once = (
+        "^/cgit.css$" => "/cgit/cgit.css",
+        "^/cgit.png$" => "/cgit/cgit.png",
+        "^/cgit/cgit.cgi/(.*)" => "/cgit/cgit.cgi/$1",
+        "^/(.*)" => "/cgit/cgit.cgi/$1",
+        )
+
+$HTTP["url"] =~ "/cgit" {
+        alias.url += ( "/cgit" => "/home/ondra/repos/cgit/" )
+        cgi.assign = ( ".cgi" => "" )
+}
