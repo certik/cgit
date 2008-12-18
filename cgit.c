@@ -429,8 +429,8 @@ int main(int argc, const char **argv)
 	cgit_repolist.count = 0;
 	cgit_repolist.repos = NULL;
 
-	if (getenv("SCRIPT_NAME"))
-		ctx.cfg.script_name = xstrdup(getenv("SCRIPT_NAME"));
+	//if (getenv("SCRIPT_NAME"))
+//		ctx.cfg.script_name = xstrdup(getenv("SCRIPT_NAME"));
 	if (getenv("QUERY_STRING"))
 		ctx.qry.raw = xstrdup(getenv("QUERY_STRING"));
 	cgit_parse_args(argc, argv);
